@@ -1,0 +1,9 @@
+# Repo root doubles as the Windows desktop — keep clutter out of the repo.
+*.lnk
+*.url
+*.zip
+*.exe
+desktop.ini
+.freebuff/
+Godot*/
+Unity Keyboard Shortcut.txt

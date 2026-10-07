@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kuis Kosakata Korea — 50 Soal</title>
+  <script>
+    // Set the theme before first paint so there is no light-mode flash.
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("kq-theme"); } catch (e) {}
+      if (t !== "dark" && t !== "light") {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="logo">한국어 <span>Quiz</span></div>
+      <div class="topbar-right">
+        <div class="meta">Kosakata Korea → Bahasa Indonesia</div>
+        <button class="theme-toggle" id="btnTheme" type="button"
+                aria-pressed="false" aria-label="Ganti mode gelap/terang"
+                title="Ganti mode gelap/terang">🌙</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============ START ============ -->
+      <section id="screen-start" class="screen active">
+        <div class="card start-card">
+          <div class="badge">50 soal pilihan ganda</div>
+          <h1>Tes Kosakata Korea</h1>
+          <p class="lead">
+            Pilih arti yang benar dari 4 pilihan (A–D) untuk setiap kata Korea.
+            Setelah 50 soal, kamu akan mendapat ringkasan skor dan pembahasan
+            jawaban yang salah.
+          </p>
+          <ul class="rules">
+            <li><strong>50 soal</strong> diacak dari bank soal</li>
+            <li><strong>4 pilihan ganda</strong>: A, B, C, D</li>
+            <li>Umpan balik <strong>langsung</strong> setiap kali menjawab</li>
+            <li><strong>Ringkasan skor</strong> + daftar soal yang salah</li>
+          </ul>
+          <button class="btn primary big" id="btnStart">Mulai Kuis</button>
+          <p class="hint">Gunakan tombol <kbd>A</kbd>–<kbd>D</kbd> / <kbd>1</kbd>–<kbd>4</kbd> dan <kbd>Enter</kbd></p>
+        </div>
+      </section>
+
+      <!-- ============ QUIZ ============ -->
+      <section id="screen-quiz" class="screen">
+        <div class="quiz-head">
+          <div class="q-counter">Soal <span id="qNum">1</span> / <span id="qTotal">50</span></div>
+          <div class="score-chip">Benar: <span id="liveScore">0</span></div>
+        </div>
+        <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+        <div class="card quiz-card">
+          <div class="q-word" id="qWord">경우</div>
+          <div class="q-rom" id="qRom">gyeong-u</div>
+          <div class="q-prompt">Apa arti kata ini?</div>
+
+          <div class="options" id="options"></div>
+
+          <div class="feedback" id="feedback" aria-live="polite"></div>
+
+          <div class="quiz-actions">
+            <button class="btn primary hidden" id="btnNext">Soal berikutnya →</button>
+            <button class="btn primary hidden" id="btnFinish">Lihat hasil →</button>
+          </div>
+        </div>
+        <div class="key-hint">
+          Tekan <kbd>A</kbd>–<kbd>D</kbd> atau <kbd>1</kbd>–<kbd>4</kbd> untuk memilih · <kbd>Enter</kbd> untuk lanjut
+        </div>
+      </section>
+
+      <!-- ============ RESULT ============ -->
+      <section id="screen-result" class="screen">
+        <div class="card result-card">
+          <div class="score-ring" id="scoreRing">
+            <div class="score-inner">
+              <div class="score-num" id="scoreNum">0</div>
+              <div class="score-den">/ <span id="scoreDen">50</span></div>
+            </div>
+          </div>
+          <div class="result-msg" id="resultMsg">—</div>
+
+          <div class="stats">
+            <div class="stat"><div class="stat-num ok" id="statCorrect">0</div><div class="stat-label">Benar</div></div>
+            <div class="stat"><div class="stat-num bad" id="statWrong">0</div><div class="stat-label">Salah</div></div>
+            <div class="stat"><div class="stat-num" id="statPct">0%</div><div class="stat-label">Persentase</div></div>
+          </div>
+
+          <div class="review-block">
+            <div class="review-head">
+              <h3 id="reviewTitle">Pembahasan jawaban yang salah</h3>
+              <button class="btn ghost small" id="btnToggleReview">Tampilkan semua</button>
+            </div>
+            <div id="reviewList" class="review"></div>
+          </div>
+
+          <div class="result-actions">
+            <button class="btn primary" id="btnRetry">Main lagi (soal baru)</button>
+            <button class="btn ghost" id="btnHome">Ke layar awal</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">Belajar kosakata Korea • <span id="bankSize">0</span> kata di bank soal</footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

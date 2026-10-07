@@ -1,0 +1,561 @@
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --ink: #16203a;
+  --ink-soft: #6b7690;
+  --line: #e6e9f2;
+  --red: #e2453c;
+  --blue: #2f6fed;
+  --blue-dark: #2459c9;
+  --green: #16a370;
+  --green-bg: #e7f7f0;
+  --red-bg: #fdeceb;
+  --amber: #d98a04;
+  --shadow: 0 10px 30px rgba(22, 32, 58, .08);
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+
+/* Never let mobile browsers inflate text on orientation change. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(1000px 500px at 15% -10%, #e8efff 0%, rgba(232, 239, 255, 0) 60%),
+    radial-gradient(900px 480px at 100% 0%, #ffe9e7 0%, rgba(255, 233, 231, 0) 55%),
+    var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px 18px 60px;
+}
+
+/* ---------- top bar ---------- */
+.topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+.logo span {
+  color: var(--blue);
+}
+.meta {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.theme-toggle {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform .12s ease, border-color .12s ease;
+}
+.theme-toggle:hover { border-color: var(--blue); transform: translateY(-1px); }
+.theme-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* ---------- screens ---------- */
+.screen { display: none; animation: fade .28s ease; }
+.screen.active { display: block; }
+@keyframes fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 30px;
+}
+
+/* ---------- start ---------- */
+.badge {
+  display: inline-block;
+  background: #eef3ff;
+  color: var(--blue-dark);
+  border: 999px;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.start-card h1 {
+  font-size: 34px;
+  margin: 16px 0 8px;
+}
+.lead {
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin: 0 0 18px;
+}
+.rules {
+  margin: 0 0 24px;
+  padding: 16px 18px;
+  background: #f8faff;
+  border: 1px dashed #cfd9f5;
+  border-radius: 14px;
+  line-height: 1.9;
+  color: #3a4666;
+}
+.rules li { margin-left: -10px; }
+.hint {
+  margin: 16px 0 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+kbd {
+  background: #eef1f8;
+  border: 1px solid #d7dcea;
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  padding: 1px 6px;
+  font-size: 12px;
+  font-family: inherit;
+  color: #465170;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 13px 22px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn.primary {
+  background: linear-gradient(180deg, var(--blue) 0%, var(--blue-dark) 100%);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(47, 111, 237, .28);
+}
+.btn.primary:hover { box-shadow: 0 10px 24px rgba(47, 111, 237, .38); }
+.btn.ghost {
+  background: #fff;
+  color: var(--blue-dark);
+  border: 1.5px solid var(--line);
+  box-shadow: none;
+}
+.btn.ghost:hover { border-color: #c9d5f6; background: #f8faff; }
+.btn.big {
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  padding: 16px;
+}
+.btn.small {
+  font-size: 13px;
+  padding: 8px 14px;
+  white-space: nowrap;
+}
+.btn.hidden, .hidden { display: none !important; }
+
+/* ---------- quiz ---------- */
+.quiz-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.q-counter {
+  font-weight: 700;
+  font-size: 15px;
+}
+.q-counter span:first-child { color: var(--blue-dark); }
+.score-chip {
+  background: var(--green-bg);
+  color: var(--green);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.progress {
+  height: 8px;
+  background: #e8ecf6;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--blue), #5f92ff);
+  border-radius: 999px;
+  transition: width .35s ease;
+}
+
+.quiz-card { padding: 34px 30px; }
+.q-word {
+  font-size: 56px;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 1.2;
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+}
+.q-rom {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-top: 4px;
+  font-style: italic;
+}
+.q-prompt {
+  text-align: center;
+  color: #465170;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin: 18px 0 20px;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  background: #fbfcff;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: 15px 16px;
+  font-size: 17px;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color .12s ease, background .12s ease, transform .12s ease;
+}
+.option:hover:not(:disabled) {
+  border-color: #b9c9f7;
+  background: #f4f7ff;
+  transform: translateY(-1px);
+}
+.option:disabled { cursor: default; }
+.opt-key {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: #eef1f8;
+  color: #465170;
+  font-weight: 800;
+  font-size: 15px;
+  display: grid;
+  place-items: center;
+}
+.opt-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.opt-ko {
+  font-size: 13px;
+  color: var(--blue-dark);
+  font-weight: 700;
+  margin-top: 2px;
+  display: none;
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+}
+.options.revealed .opt-ko { display: block; }
+.option.correct {
+  border-color: var(--green);
+  background: var(--green-bg);
+}
+.option.correct .opt-key { background: var(--green); color: #fff; }
+.option.wrong {
+  border-color: var(--red);
+  background: var(--red-bg);
+}
+.option.wrong .opt-key { background: var(--red); color: #fff; }
+.option.dim { opacity: .55; }
+
+.feedback {
+  min-height: 26px;
+  margin-top: 16px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+}
+.feedback.ok { color: var(--green); }
+.feedback.no { color: var(--red); }
+
+.quiz-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+.key-hint {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 13px;
+  margin-top: 16px;
+}
+
+/* ---------- result ---------- */
+.result-card { text-align: center; }
+.score-ring {
+  --pct: 0;
+  --ring: var(--green);
+  width: 168px;
+  height: 168px;
+  margin: 4px auto 14px;
+  border-radius: 50%;
+  background: conic-gradient(var(--ring) calc(var(--pct) * 1%), #e9edf6 0);
+  display: grid;
+  place-items: center;
+  transition: background .6s ease;
+}
+.score-inner {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  background: #fff;
+  display: grid;
+  place-content: center;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.score-num { font-size: 44px; font-weight: 800; line-height: 1; }
+.score-den { font-size: 15px; color: var(--ink-soft); margin-top: 4px; }
+.result-msg {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 26px;
+}
+.stat {
+  background: #f8faff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 8px;
+}
+.stat-num { font-size: 24px; font-weight: 800; }
+.stat-num.ok { color: var(--green); }
+.stat-num.bad { color: var(--red); }
+.stat-label {
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.review-block { text-align: left; }
+.review-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.review-head h3 { font-size: 16px; margin: 0; }
+.review {
+  max-height: 380px;
+  overflow-y: auto;
+  display: grid;
+  gap: 8px;
+  padding-right: 4px;
+}
+.review-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fbfcff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+.review-item.ok-item { background: var(--green-bg); border-color: #c9ecdd; }
+.review-num {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #eef1f8;
+  color: #5a6484;
+  font-size: 12px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+.review-word {
+  font-weight: 800;
+  font-size: 17px;
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  flex: 0 0 96px;
+}
+.review-answers { font-size: 14px; line-height: 1.5; flex: 1 1 auto; min-width: 110px; }
+.review-answers .yours.no { color: var(--red); text-decoration: line-through; }
+.review-answers .right { color: var(--green); font-weight: 700; }
+.review-answers .ko-inline {
+  color: var(--blue-dark);
+  font-weight: 700;
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+}
+.review-tag {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .6px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  flex: 0 0 auto;
+}
+.tag-no { background: var(--red-bg); color: var(--red); }
+.tag-yes { background: var(--green-bg); color: var(--green); }
+
+.review-empty {
+  background: var(--green-bg);
+  border: 1px dashed #a8e0cb;
+  color: var(--green);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.result-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+.foot {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 13px;
+  margin-top: 26px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 560px) {
+  .card { padding: 22px 18px; }
+  .start-card h1 { font-size: 27px; }
+  .option { font-size: 16px; padding: 13px 12px; }
+  .review-word { flex-basis: auto; }
+  .review-item { flex-wrap: wrap; }
+  .review-answers { flex: 1 0 100%; padding-left: 38px; min-width: 0; order: 1; }
+  .review-head { flex-wrap: wrap; }
+
+  /* Fluid headline: big on phones, but the longest Korean words
+     (6 syllables) still fit on one line down to 320px. */
+  .q-word { font-size: clamp(34px, 11vw, 44px); }
+
+  /* Subtitle is decorative and wraps to two lines on phones. */
+  .meta { display: none; }
+
+  /* 44px tap target for the theme switch. */
+  .theme-toggle { width: 44px; height: 44px; font-size: 19px; }
+
+  /* Equal stat columns (auto-min sizing made them 59/59/95px). */
+  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .stat { padding: 12px 6px; }
+  .stat-label { font-size: 11px; letter-spacing: .5px; }
+
+  /* Respect notches and home indicators when the viewport fills the screen. */
+  .app {
+    padding-left: max(18px, env(safe-area-inset-left));
+    padding-right: max(18px, env(safe-area-inset-right));
+    padding-bottom: max(60px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 380px) {
+  .stat { padding: 12px 2px; }
+  .stat-num { font-size: 21px; }
+  .stat-label { font-size: 10px; letter-spacing: 0; }
+}
+
+/* Keyboard hints only make sense with a keyboard. */
+@media (hover: none) and (pointer: coarse) {
+  .hint, .key-hint { display: none; }
+}
+
+/* ---------- dark mode ---------- */
+/* Core palette is swapped through the variables; everything below
+   covers the few places where colors were written literally. */
+html[data-theme="dark"] {
+  --bg: #0e1424;
+  --card: #161d31;
+  --ink: #e9edf7;
+  --ink-soft: #98a2bb;
+  --line: #2a3450;
+  --green-bg: #10342a;
+  --red-bg: #3b1d20;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .4);
+}
+
+html[data-theme="dark"] body {
+  background:
+    radial-gradient(1000px 500px at 15% -10%, #17223d 0%, rgba(23, 34, 61, 0) 60%),
+    radial-gradient(900px 480px at 100% 0%, #2b1a24 0%, rgba(43, 26, 36, 0) 55%),
+    var(--bg);
+}
+
+html[data-theme="dark"] .badge { background: #1c2745; color: #9dbaff; }
+html[data-theme="dark"] .rules { background: #131a2d; border-color: #33406a; color: #bcc5dc; }
+html[data-theme="dark"] kbd { background: #222b45; border-color: #38446a; color: #cbd3e6; }
+html[data-theme="dark"] .btn.ghost { background: #1a2340; color: #8ab0ff; border-color: var(--line); }
+html[data-theme="dark"] .btn.ghost:hover { background: #202b4d; border-color: #3d4d80; }
+html[data-theme="dark"] .q-counter span:first-child { color: #8ab0ff; }
+html[data-theme="dark"] .q-prompt { color: #93a0bd; }
+html[data-theme="dark"] .progress { background: #232c47; }
+html[data-theme="dark"] .option { background: #131a2d; border-color: var(--line); }
+html[data-theme="dark"] .option:hover:not(:disabled) { border-color: #4461b8; background: #182240; }
+html[data-theme="dark"] .opt-key { background: #232c47; color: #a9b4cf; }
+html[data-theme="dark"] .opt-ko { color: #8ab0ff; }
+html[data-theme="dark"] .score-ring { background: conic-gradient(var(--ring) calc(var(--pct) * 1%), #232c47 0); }
+html[data-theme="dark"] .score-inner { background: var(--card); }
+html[data-theme="dark"] .stat { background: #141c33; }
+html[data-theme="dark"] .review-item { background: #131a2d; }
+html[data-theme="dark"] .review-item.ok-item { background: var(--green-bg); border-color: #1e5a45; }
+html[data-theme="dark"] .review-num { background: #232c47; color: #a9b4cf; }
+html[data-theme="dark"] .review-answers .ko-inline { color: #8ab0ff; }
+html[data-theme="dark"] .review-empty { background: var(--green-bg); border-color: #2c6a55; }
+
+/* Light-blue accents are tuned per use so the primary button keeps its
+   white-on-blue gradient (a global --blue-dark swap would wash it out). */
+html[data-theme="dark"] .logo span { color: #6f9bff; }
