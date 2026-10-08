@@ -1,7 +1,7 @@
 /* Service worker for Kuis Kosakata Korea (mobile version) */
 "use strict";
 
-const CACHE = "kq-mobile-v1";
+const CACHE = "kq-mobile-v2";
 
 const SHELL = [
   "./",
